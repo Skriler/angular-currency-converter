@@ -1,0 +1,43 @@
+<div class="converter-form-wrapper">
+  <h1>Currency Converter</h1>
+
+  <div class="block-wrapper">
+    <h2>Select currencies</h2>
+    <select [(ngModel)]="baseCurrency.code"
+            (change)="calculateCurrency('base')">
+      <option *ngFor="let code of getExchangeBaseCodes()"
+              [value]="code">
+        {{code}}
+      </option>
+    </select>
+    <select [(ngModel)]="secondaryCurrency.code"
+            (change)="calculateCurrency('secondary')">
+      <option *ngFor="let code of this.exchangeCodes.get(baseCurrency.code)"
+              [value]= "code">
+        {{code}}
+      </option>
+    </select>
+  </div>
+
+  <div class="block-wrapper">
+    <h2>Buy</h2>
+    <input type="text"
+           [(ngModel)]="baseCurrency.buy"
+           (change)="calculateCurrency('secondary')">
+    <input type="text"
+           [(ngModel)]="secondaryCurrency.buy"
+           (change)="calculateCurrency('base')">
+  </div>
+
+  <div class="block-wrapper">
+    <h2>Sale</h2>
+    <input type="text"
+           [(ngModel)]="baseCurrency.sale"
+           (change)="calculateCurrency('secondary')"
+           disabled>
+    <input type="text"
+           [(ngModel)]="secondaryCurrency.sale"
+           (change)="calculateCurrency('base')"
+           disabled>
+  </div>
+</div>
